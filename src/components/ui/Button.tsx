@@ -9,7 +9,7 @@ import { Loader } from "lucide-react";
 const buttonVariants = tv({
   base: [
     // base
-    "relative inline-flex items-center justify-center whitespace-nowrap rounded-md border px-3 py-2 text-center font-medium shadow-sm transition-all duration-100 ease-in-out",
+    "relative inline-flex gap-2 items-center justify-center whitespace-nowrap rounded-md border px-3 py-2 text-center font-medium shadow-sm transition-all duration-100 ease-in-out",
     "cursor-pointer",
     // disabled
     "disabled:pointer-events-none disabled:shadow-none",

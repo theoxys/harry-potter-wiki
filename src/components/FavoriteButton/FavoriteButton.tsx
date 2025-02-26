@@ -3,7 +3,7 @@
 import { Character } from "@/types/Character";
 import { useFavorites } from "@/hooks/useFavorites";
 import { Star } from "lucide-react";
-import { cx } from "@/utils/tailwind";
+import { Button } from "../ui/Button";
 
 interface FavoriteButtonProps {
   character: Character;
@@ -20,18 +20,12 @@ export function FavoriteButton({ character }: FavoriteButtonProps) {
   };
 
   return (
-    <button
+    <Button
       onClick={handleClick}
-      className={cx(
-        "absolute flex items-center gap-2 top-6 right-6 py-2 px-4 rounded-full backdrop-blur-sm transition-colors cursor-pointer",
-        isFavoritedCharacter
-          ? "bg-primary"
-          : "bg-background/80 hover:bg-background"
-      )}
+      className="absolute top-6 right-6 py-2 px-4 rounded-full"
+      variant={isFavoritedCharacter ? "primary" : "darker"}
     >
-      <p className="text-neutral">
-        {isFavoritedCharacter ? "Favorited!" : "Add to favorites"}
-      </p>
+      {isFavoritedCharacter ? "Favorited!" : "Add to favorites"}
       <Star
         className={`h-5 w-5 transition-colors ${
           isFavoritedCharacter
@@ -39,6 +33,6 @@ export function FavoriteButton({ character }: FavoriteButtonProps) {
             : "stroke-neutral fill-transparent"
         }`}
       />
-    </button>
+    </Button>
   );
 }

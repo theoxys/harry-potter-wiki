@@ -1,5 +1,4 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 type Theme = "gryffindor" | "slytherin" | "ravenclaw" | "hufflepuff";
 
@@ -11,21 +10,32 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  const [theme, setTheme] = useState<Theme>("gryffindor");
   const [mounted, setMounted] = useState(false);
-  const [theme, setTheme] = useLocalStorage<Theme>("theme", "gryffindor");
 
   useEffect(() => {
-    const htmlElement = document.documentElement;
-    htmlElement.classList.add(theme);
-
-    return () => {
-      htmlElement.classList.remove(theme);
-    };
-  }, [theme]);
-
-  useEffect(() => {
+    // Carrega o tema do localStorage apenas no cliente
+    const savedTheme = localStorage.getItem("theme") as Theme;
+    if (savedTheme) {
+      setTheme(savedTheme);
+    }
     setMounted(true);
   }, []);
+
+  useEffect(() => {
+    if (mounted) {
+      // Salva o tema no localStorage apenas quando montado no cliente
+      localStorage.setItem("theme", theme);
+      const htmlElement = document.documentElement;
+      htmlElement.classList.remove(
+        "gryffindor",
+        "slytherin",
+        "ravenclaw",
+        "hufflepuff"
+      );
+      htmlElement.classList.add(theme);
+    }
+  }, [theme, mounted]);
 
   if (!mounted) {
     return null;

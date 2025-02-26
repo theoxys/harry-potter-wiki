@@ -3,13 +3,11 @@ import { api } from "@/services/api";
 import { CharacterCard } from "@/components/CharacterCard/CharacterCard";
 import { BackButton } from "@/components/BackButton/BackButton";
 
-type PageProps = {
-  params: {
-    id: string;
-  };
-};
-
-export default async function CharacterPage({ params }: PageProps) {
+export default async function CharacterPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const { id } = await params;
   const character = await api.characters.getById(id);
 

@@ -9,6 +9,7 @@ import {
   SelectValue,
 } from "@/components/ui/Select";
 import { Input } from "../ui/Input";
+import { Button } from "../ui/Button";
 
 const HOUSES = [
   "Any house",
@@ -131,12 +132,9 @@ export function FilterSidebar() {
           </Select>
         </div>
 
-        <button
-          onClick={handleResetFilters}
-          className="w-full py-2 px-4 bg-primary text-neutral rounded-md hover:bg-primary/90 transition-colors"
-        >
+        <Button onClick={handleResetFilters} className="w-full">
           Reset Filters
-        </button>
+        </Button>
       </div>
     </div>
   );
