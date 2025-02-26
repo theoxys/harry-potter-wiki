@@ -29,7 +29,7 @@ export function ThemeSelector() {
 
   return (
     <div className="flex items-center gap-4">
-      <div className="flex gap-2">
+      <div className="flex flex-wrap gap-2">
         {themes.map((themeOption) => (
           <button
             key={themeOption.value}

@@ -15,8 +15,8 @@ export default function ListLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="grid grid-cols-[256px_1fr] w-full min-h-screen h-full bg-background text-neutral">
-      <div className="sticky top-0 h-screen border-r border-neutral/10 bg-surface">
+    <div className="grid md:grid-cols-[256px_1fr] grid-cols-[1fr] w-full min-h-screen h-full bg-background text-neutral">
+      <div className="sticky top-0 h-screen border-r border-neutral/10 bg-surface md:block hidden">
         <FilterSidebar />
       </div>
 
