@@ -7,6 +7,7 @@ interface CharacterCardProps {
   image: string;
   gender: string;
   house?: string;
+  children?: React.ReactNode;
 }
 
 export function CharacterCard({
@@ -15,21 +16,24 @@ export function CharacterCard({
   image,
   gender,
   house,
+  children,
 }: CharacterCardProps) {
   return (
-    <Link
-      href={`/character/${id}`}
-      className="bg-surface rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
-    >
-      <CharacterImage image={image} gender={gender} name={name} />
-      <div className="p-4">
-        <div className="flex justify-between items-center">
-          <h2 className="text-lg font-medium text-neutral">{name}</h2>
+    <div className="group relative flex flex-col bg-surface border border-neutral/10 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow p-4 gap-4">
+      <Link href={`/character/${id}`} className="flex flex-col gap-4">
+        <div className="relative">
+          <CharacterImage image={image} gender={gender} name={name} />
         </div>
-        <p className="text-sm mt-1 text-neutral/70">
-          {house || "Unknown house"}
-        </p>
-      </div>
-    </Link>
+        <div className="flex flex-col gap-1">
+          <div className="flex justify-between items-center">
+            <h2 className="text-lg font-medium text-neutral">{name}</h2>
+          </div>
+          <p className="text-sm mt-1 text-neutral/70">
+            {house || "Unknown house"}
+          </p>
+        </div>
+      </Link>
+      {children}
+    </div>
   );
 }

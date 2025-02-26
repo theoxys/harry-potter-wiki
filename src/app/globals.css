@@ -2,38 +2,25 @@
 
 @layer base {
   :root {
-    --neutral: #ffffff;
-    --neutral-inverse: #171717;
-    
-    --primary: #23F4D4;
-    --background: #0a0a0a;
-    --surface: #171717;
-    --element: #404040;
+    --hue: 200;
+    --primary: #49339c;
   }
 
   .gryffindor {
+    --hue: 3;
     --primary: #D84C45;
-    --background: #100504;
-    --surface: #180807;
-    --element: #404040;
   }
   .ravenclaw {
+    --hue: 217;
     --primary: #1E5BBB;
-    --background: #040910;
-    --surface: #070E18;
-    --element: #111B2C;
   }
   .hufflepuff {
+    --hue: 34;
     --primary: #C77000;
-    --background: #100B04;
-    --surface: #181107;
-    --element: #2C2011;
   }
   .slytherin {
-    --primary: #106152;
-    --background: #0a0a0a;
-    --surface: #171717;
-    --element: #404040;
+    --hue: 169;
+    --primary: #0C6051;
   }  
 
 
@@ -45,10 +32,12 @@
 
 
 @theme inline {
-  --color-neutral: var(--neutral);
-  --color-neutral-inverse: var(--neutral-inverse);
-  --color-background: var(--background);
-  --color-surface: var(--surface);
-  --color-element: var(--element);
+  --color-neutral: #ffffff;
+  --color-neutral-inverse: #171717;
+
+  --color-background: hsl(var(--hue), 58%, 4%);
+  --color-surface: hsl(var(--hue), 54%, 6%);
+  --color-element: hsl(var(--hue), 44%, 12%);
+
   --color-primary: var(--primary);
 }

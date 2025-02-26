@@ -15,32 +15,16 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useLocalStorage<Theme>("theme", "gryffindor");
 
   useEffect(() => {
-    document.body.className = theme;
+    const htmlElement = document.documentElement;
+    htmlElement.classList.add(theme);
+
+    return () => {
+      htmlElement.classList.remove(theme);
+    };
   }, [theme]);
 
   useEffect(() => {
     setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    const themeScript = `
-      (function() {
-        try {
-          const storedTheme = localStorage.getItem('theme');
-          if (storedTheme) {
-            document.body.className = JSON.parse(storedTheme);
-          }
-        } catch (e) {}
-      })();
-    `;
-
-    const scriptElement = document.createElement("script");
-    scriptElement.innerHTML = themeScript;
-    document.head.insertBefore(scriptElement, document.head.firstChild);
-
-    return () => {
-      document.head.removeChild(scriptElement);
-    };
   }, []);
 
   if (!mounted) {

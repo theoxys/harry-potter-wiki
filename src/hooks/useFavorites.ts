@@ -1,5 +1,6 @@
 import { Character } from "@/types/Character";
 import { useLocalStorage } from "./useLocalStorage";
+import { useCallback } from "react";
 
 export function useFavorites() {
   const [favorites, setFavorites] = useLocalStorage<Character[]>(
@@ -7,25 +8,37 @@ export function useFavorites() {
     []
   );
 
-  const addFavorite = (character: Character) => {
-    setFavorites((prev) => [...prev, character]);
-  };
+  const addFavorite = useCallback(
+    (character: Character) => {
+      setFavorites((prev) => [...prev, character]);
+    },
+    [setFavorites]
+  );
 
-  const removeFavorite = (characterId: string) => {
-    setFavorites((prev) => prev.filter((char) => char.id !== characterId));
-  };
+  const removeFavorite = useCallback(
+    (characterId: string) => {
+      setFavorites((prev) => prev.filter((char) => char.id !== characterId));
+    },
+    [setFavorites]
+  );
 
-  const isFavorite = (characterId: string) => {
-    return favorites.some((char) => char.id === characterId);
-  };
+  const isFavorite = useCallback(
+    (characterId: string) => {
+      return favorites.some((char) => char.id === characterId);
+    },
+    [favorites]
+  );
 
-  const toggleFavorite = (character: Character) => {
-    if (isFavorite(character.id)) {
-      removeFavorite(character.id);
-    } else {
-      addFavorite(character);
-    }
-  };
+  const toggleFavorite = useCallback(
+    (character: Character) => {
+      if (isFavorite(character.id)) {
+        removeFavorite(character.id);
+      } else {
+        addFavorite(character);
+      }
+    },
+    [isFavorite, removeFavorite, addFavorite]
+  );
 
   return {
     favorites,

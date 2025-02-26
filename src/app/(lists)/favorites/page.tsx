@@ -5,10 +5,14 @@ import { useQueryState } from "nuqs";
 import { useFilter } from "@/hooks/useFilter";
 import { useSorting } from "@/hooks/useSorting";
 import { CharacterCard } from "@/components/CharacterCard/CharacterCard";
+import { useGetAllCharacters } from "@/hooks/useGetAllCharacters";
 import { FavoriteButton } from "@/components/FavoriteButton/FavoriteButton";
+import { useFavorites } from "@/hooks/useFavorites";
+import { Character } from "@/types/Character";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 
-export default function Staff() {
-  const { staff, loading, error } = useGetStaff();
+export default function Favorites() {
+  const [favorites] = useLocalStorage<Character[]>("favorites", []);
 
   const [searchTerm] = useQueryState("search", { defaultValue: "" });
   const [house] = useQueryState("house", { defaultValue: "Any house" });
@@ -33,15 +37,12 @@ export default function Staff() {
     direction: sortDirection as "asc" | "desc",
   };
 
-  const filteredStaff = useFilter(staff, filters);
-  const sortedStaff = useSorting(filteredStaff, sortOption);
-
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  const filteredCharacters = useFilter(favorites, filters);
+  const sortedCharacters = useSorting(filteredCharacters, sortOption);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {sortedStaff.map((character) => (
+      {sortedCharacters.map((character) => (
         <CharacterCard
           key={character.id}
           id={character.id}

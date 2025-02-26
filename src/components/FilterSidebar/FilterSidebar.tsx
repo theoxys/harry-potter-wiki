@@ -8,6 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/Select";
+import { Input } from "../ui/Input";
 
 const HOUSES = [
   "Any house",
@@ -39,16 +40,23 @@ export function FilterSidebar() {
     defaultValue: "asc",
   });
 
+  const handleResetFilters = () => {
+    setSearchTerm("");
+    setHouse("Any house");
+    setSpecies("Any species");
+    setAncestry("Any ancestry");
+    setSortField("name");
+    setSortDirection("asc");
+  };
+
   return (
     <div className="w-64 p-6">
       <div className="space-y-6">
         <div>
           <h3 className="text-sm text-neutral/70 mb-2">SEARCH BY NAME</h3>
-          <input
-            type="text"
+          <Input
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full p-2 border border-neutral/10 rounded-lg bg-surface text-neutral"
             placeholder="Search..."
           />
         </div>
@@ -113,19 +121,22 @@ export function FilterSidebar() {
           >
             <SelectTrigger>
               <SelectValue>
-                {sortField === "name"
-                  ? `Nome (${sortDirection === "asc" ? "A-Z" : "Z-A"})`
-                  : `Casa (${sortDirection === "asc" ? "A-Z" : "Z-A"})`}
+                {`Name (${sortDirection === "asc" ? "A-Z" : "Z-A"})`}
               </SelectValue>
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="name-asc">Nome (A-Z)</SelectItem>
-              <SelectItem value="name-desc">Nome (Z-A)</SelectItem>
-              <SelectItem value="house-asc">Casa (A-Z)</SelectItem>
-              <SelectItem value="house-desc">Casa (Z-A)</SelectItem>
+              <SelectItem value="name-asc">Name (A-Z)</SelectItem>
+              <SelectItem value="name-desc">Name (Z-A)</SelectItem>
             </SelectContent>
           </Select>
         </div>
+
+        <button
+          onClick={handleResetFilters}
+          className="w-full py-2 px-4 bg-primary text-neutral rounded-md hover:bg-primary/90 transition-colors"
+        >
+          Reset Filters
+        </button>
       </div>
     </div>
   );

@@ -21,12 +21,16 @@ export function CharacterImage({
   return (
     <div className={`relative aspect-[4/5] overflow-hidden ${className}`}>
       {image ? (
-        <img src={image} alt={name} className="w-full h-full object-cover" />
+        <img
+          src={image}
+          alt={name}
+          className="w-full h-full object-cover rounded-lg"
+        />
       ) : (
         <img
           src={placeholderImage}
           alt={`${name} placeholder`}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover rounded-lg"
         />
       )}
     </div>

@@ -8,8 +8,8 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
     <ThemeProvider>
       <ProgressProvider
-        height="6px"
-        color="#000"
+        height="4px"
+        color="var(--primary)"
         options={{ showSpinner: false }}
         shallowRouting
       >
