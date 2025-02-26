@@ -3,12 +3,15 @@ import { api } from "@/services/api";
 import { CharacterCard } from "@/components/CharacterCard/CharacterCard";
 import { BackButton } from "@/components/BackButton/BackButton";
 
-export default async function CharacterPage({
-  params,
-}: {
-  params: { id: string };
-}) {
-  const character = await api.characters.getById(params.id);
+type PageProps = {
+  params: {
+    id: string;
+  };
+};
+
+export default async function CharacterPage({ params }: PageProps) {
+  const { id } = await params;
+  const character = await api.characters.getById(id);
 
   if (!character) {
     notFound();
