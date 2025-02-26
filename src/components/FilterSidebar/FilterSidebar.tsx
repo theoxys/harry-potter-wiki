@@ -1,7 +1,13 @@
 "use client";
 
 import { useQueryState } from "nuqs";
-import { Character } from "@/types/Character";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/Select";
 
 const HOUSES = [
   "Any house",
@@ -37,77 +43,88 @@ export function FilterSidebar() {
     <div className="w-64 p-6">
       <div className="space-y-6">
         <div>
-          <h3 className="text-sm text-element mb-2">SEARCH BY NAME</h3>
+          <h3 className="text-sm text-neutral/70 mb-2">SEARCH BY NAME</h3>
           <input
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full p-2 border border-element rounded-lg bg-surface text-neutral"
+            className="w-full p-2 border border-neutral/10 rounded-lg bg-surface text-neutral"
             placeholder="Search..."
           />
         </div>
 
         <div>
-          <h3 className="text-sm text-element mb-2">FILTER BY HOUSE</h3>
-          <select
-            value={house}
-            onChange={(e) => setHouse(e.target.value)}
-            className="w-full p-2 border border-element rounded-lg bg-surface text-neutral"
-          >
-            {HOUSES.map((h) => (
-              <option key={h} value={h}>
-                {h}
-              </option>
-            ))}
-          </select>
+          <h3 className="text-sm text-neutral/70 mb-2">FILTER BY HOUSE</h3>
+          <Select value={house} onValueChange={setHouse}>
+            <SelectTrigger>
+              <SelectValue>{house}</SelectValue>
+            </SelectTrigger>
+            <SelectContent>
+              {HOUSES.map((h) => (
+                <SelectItem key={h} value={h}>
+                  {h}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
 
         <div>
-          <h3 className="text-sm text-element mb-2">FILTER BY SPECIES</h3>
-          <select
-            value={species}
-            onChange={(e) => setSpecies(e.target.value)}
-            className="w-full p-2 border border-element rounded-lg bg-surface text-neutral"
-          >
-            {SPECIES.map((s) => (
-              <option key={s} value={s}>
-                {s}
-              </option>
-            ))}
-          </select>
+          <h3 className="text-sm text-neutral/70 mb-2">FILTER BY SPECIES</h3>
+          <Select value={species} onValueChange={setSpecies}>
+            <SelectTrigger>
+              <SelectValue>{species}</SelectValue>
+            </SelectTrigger>
+            <SelectContent>
+              {SPECIES.map((s) => (
+                <SelectItem key={s} value={s}>
+                  {s}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
 
         <div>
-          <h3 className="text-sm text-element mb-2">FILTER BY ANCESTRY</h3>
-          <select
-            value={ancestry}
-            onChange={(e) => setAncestry(e.target.value)}
-            className="w-full p-2 border border-element rounded-lg bg-surface text-neutral"
-          >
-            {ANCESTRY.map((a) => (
-              <option key={a} value={a}>
-                {a}
-              </option>
-            ))}
-          </select>
+          <h3 className="text-sm text-neutral/70 mb-2">FILTER BY ANCESTRY</h3>
+          <Select value={ancestry} onValueChange={setAncestry}>
+            <SelectTrigger>
+              <SelectValue>{ancestry}</SelectValue>
+            </SelectTrigger>
+            <SelectContent>
+              {ANCESTRY.map((a) => (
+                <SelectItem key={a} value={a}>
+                  {a}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
 
         <div>
-          <h3 className="text-sm text-element mb-2">SORT BY</h3>
-          <select
+          <h3 className="text-sm text-neutral/70 mb-2">SORT BY</h3>
+          <Select
             value={`${sortField}-${sortDirection}`}
-            onChange={(e) => {
-              const [field, direction] = e.target.value.split("-");
+            onValueChange={(value) => {
+              const [field, direction] = value.split("-");
               setSortField(field);
               setSortDirection(direction);
             }}
-            className="w-full p-2 border border-element rounded-lg bg-surface text-neutral"
           >
-            <option value="name-asc">Nome (A-Z)</option>
-            <option value="name-desc">Nome (Z-A)</option>
-            <option value="house-asc">Casa (A-Z)</option>
-            <option value="house-desc">Casa (Z-A)</option>
-          </select>
+            <SelectTrigger>
+              <SelectValue>
+                {sortField === "name"
+                  ? `Nome (${sortDirection === "asc" ? "A-Z" : "Z-A"})`
+                  : `Casa (${sortDirection === "asc" ? "A-Z" : "Z-A"})`}
+              </SelectValue>
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="name-asc">Nome (A-Z)</SelectItem>
+              <SelectItem value="name-desc">Nome (Z-A)</SelectItem>
+              <SelectItem value="house-asc">Casa (A-Z)</SelectItem>
+              <SelectItem value="house-desc">Casa (Z-A)</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
       </div>
     </div>

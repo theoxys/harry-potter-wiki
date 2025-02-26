@@ -28,8 +28,8 @@ export function PageNavigation({ items }: PageNavigationProps) {
             className={twMerge(
               "px-4 py-2 rounded-md transition-colors",
               isActive
-                ? "bg-primary text-neutral-inverse"
-                : "hover:bg-neutral-100"
+                ? "bg-primary text-neutral font-medium"
+                : "hover:bg-primary/10"
             )}
           >
             {item.name}

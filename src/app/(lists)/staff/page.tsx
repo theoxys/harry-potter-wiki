@@ -1,12 +1,10 @@
 "use client";
 
 import { useGetStaff } from "@/hooks/useGetStaff";
-import { Link } from "next-view-transitions";
 import { useQueryState } from "nuqs";
-import { FilterSidebar } from "@/components/FilterSidebar/FilterSidebar";
 import { useFilter } from "@/hooks/useFilter";
 import { useSorting } from "@/hooks/useSorting";
-import { CharacterImage } from "@/components/CharacterImage/CharacterImage";
+import { CharacterCard } from "@/components/CharacterCard/CharacterCard";
 
 export default function Staff() {
   const { staff, loading, error } = useGetStaff();
@@ -43,27 +41,14 @@ export default function Staff() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {sortedStaff.map((character) => (
-        <Link
+        <CharacterCard
           key={character.id}
-          href={`/character/${character.id}`}
-          className="bg-surface rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
-        >
-          <CharacterImage
-            image={character.image}
-            gender={character.gender}
-            name={character.name}
-          />
-          <div className="p-4">
-            <div className="flex justify-between items-center">
-              <h2 className="text-lg font-medium text-neutral">
-                {character.name}
-              </h2>
-            </div>
-            <p className="text-sm text-element mt-1">
-              {character.house || "Unknown house"}
-            </p>
-          </div>
-        </Link>
+          id={character.id}
+          name={character.name}
+          image={character.image}
+          gender={character.gender}
+          house={character.house}
+        />
       ))}
     </div>
   );
