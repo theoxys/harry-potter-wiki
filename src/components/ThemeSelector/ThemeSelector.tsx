@@ -24,7 +24,7 @@ export function ThemeSelector() {
   }, []);
 
   if (!mounted) {
-    return null;
+    return <></>;
   }
 
   return (

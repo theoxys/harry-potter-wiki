@@ -16,7 +16,7 @@ export default async function CharacterPage({
   }
 
   return (
-    <div className="flex flex-col items-center justify-start max-w-4xl mx-auto min-h-screen p-8 bg-background text-neutral">
+    <div className="flex flex-col items-start gap-4 justify-start max-w-4xl mx-auto p-8 bg-background text-neutral min-h-screen h-fit">
       <BackButton />
       <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8">
         <CharacterCard

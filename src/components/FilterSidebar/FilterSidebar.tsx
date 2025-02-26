@@ -51,7 +51,7 @@ export function FilterSidebar() {
   };
 
   return (
-    <div className="w-64 p-6">
+    <div className="w-full p-6">
       <div className="space-y-6">
         <div>
           <h3 className="text-sm text-neutral/70 mb-2">SEARCH BY NAME</h3>
