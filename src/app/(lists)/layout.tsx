@@ -2,7 +2,7 @@ import { FilterSidebar } from "@/components/FilterSidebar/FilterSidebar";
 import { PageNavigation } from "@/components/PageNavigation/PageNavigation";
 
 const navigationItems = [
-  { name: "Choose Your House", href: "/preferred-houses" },
+  { name: "Choose Your House", href: "/" },
   { name: "All Characters", href: "/all" },
   { name: "Staff", href: "/staff" },
   { name: "Students", href: "/students" },
