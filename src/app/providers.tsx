@@ -1,6 +1,7 @@
 "use client";
 
 import { AppProgressProvider as ProgressProvider } from "@bprogress/next";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -10,7 +11,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
       options={{ showSpinner: false }}
       shallowRouting
     >
-      {children}
+      <NuqsAdapter>{children}</NuqsAdapter>
     </ProgressProvider>
   );
 };
